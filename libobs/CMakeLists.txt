@@ -50,6 +50,8 @@ find_package(ZLIB REQUIRED)
 
 include_directories(SYSTEM ${ZLIB_INCLUDE_DIR})
 
+find_package(Boost COMPONENTS system)
+
 add_definitions(-DLIBOBS_EXPORTS)
 
 include_directories(${OBS_JANSSON_INCLUDE_DIRS})
@@ -353,12 +355,21 @@ set(libobs_libobs_HEADERS
 	obs-ffmpeg-compat.h
 	obs.hpp)
 
+set(libobs_netvid_SOURCES
+	netvid_hook.cpp
+	../netvid/net.cpp
+	../netvid/framebuffer.cpp)
+
+set(libobs_netvid_HEADERS
+	netvid_hook.h)
+
 set(libobs_SOURCES
 	${libobs_callback_SOURCES}
 	${libobs_graphics_SOURCES}
 	${libobs_mediaio_SOURCES}
 	${libobs_util_SOURCES}
-	${libobs_libobs_SOURCES})
+	${libobs_libobs_SOURCES}
+	${libobs_netvid_SOURCES})
 
 set(libobs_HEADERS
 	${libobs_config_HEADERS}
@@ -369,7 +380,7 @@ set(libobs_HEADERS
 	${libobs_libobs_HEADERS}
 	${libobs_audio_monitoring_SOURCES}
 	${libobs_audio_monitoring_HEADERS}
-	)
+	${libobs_netvid_HEADERS})
 
 source_group("callback\\Source Files" FILES ${libobs_callback_SOURCES})
 source_group("callback\\Header Files" FILES ${libobs_callback_HEADERS})
@@ -426,7 +437,8 @@ target_link_libraries(libobs
 		${FFMPEG_LIBRARIES}
 		${ZLIB_LIBRARIES}
 	PUBLIC
-		${THREADS_LIBRARIES})
+		${THREADS_LIBRARIES}
+		${Boost_LIBRARIES})
 
 install_obs_core(libobs EXPORT LibObs)
 install_obs_data(libobs data libobs)

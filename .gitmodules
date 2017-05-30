@@ -13,3 +13,6 @@
 [submodule "plugins/obs-vst"]
 	path = plugins/obs-vst
 	url = https://github.com/DDRBoxman/obs-vst.git
+[submodule "netvid"]
+	path = netvid
+	url = https://github.com:trylle/netvid.git

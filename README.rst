@@ -10,6 +10,19 @@ What is OBS Studio?
   It's distributed under the GNU General Public License v2 - see the
   accompanying COPYING file for more details.
 
+This fork adds netvid support
+`````````````````````````````
+
+Use the following environment variables to configure:
+
+ - remote_gfx_endpoint
+
+   The destination address and port to send video stream. Should be formatted as such [host]:[port]
+
+ - remote_gfx_rate_limit
+
+   Optional rate limit in bits per second. Default is unlimited.
+
 Quick Links
 -----------
 

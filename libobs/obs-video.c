@@ -20,6 +20,7 @@
 #include "graphics/vec4.h"
 #include "media-io/format-conversion.h"
 #include "media-io/video-frame.h"
+#include "netvid_hook.h"
 
 static uint64_t tick_sources(uint64_t cur_time, uint64_t last_time)
 {
@@ -499,6 +500,9 @@ static inline void output_video_data(struct obs_core_video *video,
 		} else {
 			copy_rgbx_frame(&output_frame, input_frame, info);
 		}
+
+		if (!video->gpu_conversion)
+			netvid_new_frame_bgr(input_frame->data[0], info->width, info->height, 32, input_frame->linesize[0], /*info->width/(double)info->height*/4/3.);
 
 		video_output_unlock_frame(video->video);
 	}
