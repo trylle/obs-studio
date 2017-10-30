@@ -12,3 +12,4 @@ Welcome to OBS Studio's documentation!
    :maxdepth: 2
 
    backend-design
+   plugins
